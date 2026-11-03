@@ -143,6 +143,13 @@ function App() {
     setFocusedCheckpoint(null)
   }, [])
 
+  const handleFocusCheckpoint = useCallback((checkpoint: RouteCheckpoint) => {
+    setFocusedCheckpoint(checkpoint)
+    if (window.innerWidth <= 900) {
+      setSidebarOpen(false)
+    }
+  }, [])
+
   const selectedRoute = useMemo(() => {
     if (!planResult) {
       return null
@@ -158,7 +165,7 @@ function App() {
     <div className="app-shell">
       <aside className={`app-sidebar ${sidebarOpen ? 'open' : 'collapsed'}`}>
         <header className="sidebar-header">
-          <div>
+          <div className="sidebar-header-main">
             <div className="brand-row">
               <span className="brand-dot" />
               <span className="brand-name">Spotter</span>
@@ -173,7 +180,17 @@ function App() {
                     : 'Checking…'}
               </span>
             </div>
-            <h1 className="sidebar-title">Weather-Aware Truck Routing</h1>
+            <div className="sidebar-title-row">
+              <h1 className="sidebar-title">Weather-Aware Truck Routing</h1>
+              <button
+                type="button"
+                className="sidebar-close-mobile-btn"
+                onClick={() => setSidebarOpen(false)}
+                aria-label="Close trip planner panel"
+              >
+                ✕ Map
+              </button>
+            </div>
           </div>
         </header>
 
@@ -240,13 +257,21 @@ function App() {
                   intervalMiles={planResult.interval_miles}
                   checkpoints={selectedRoute.checkpoints}
                   focusedCheckpointIndex={focusedCheckpoint?.index ?? null}
-                  onFocusCheckpoint={setFocusedCheckpoint}
+                  onFocusCheckpoint={handleFocusCheckpoint}
                 />
               )}
             </section>
           )}
         </div>
       </aside>
+
+      {sidebarOpen && (
+        <div
+          className="sidebar-mobile-backdrop"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
       <main className="app-map-stage">
         <button

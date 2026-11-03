@@ -249,3 +249,35 @@
   font-weight: 600;
 }
 
+@media (max-width: 900px) {
+  .map-floating-controls {
+    top: 14px;
+    right: 50px;
+  }
+
+  .map-pill-btn {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .map-risk-legend {
+    top: 56px;
+    left: 14px;
+    right: auto;
+    bottom: auto;
+    padding: 7px 10px;
+    font-size: 10.5px;
+  }
+
+  .map-legend-title {
+    display: none;
+  }
+
+  .map-legend-items {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+}
+
+

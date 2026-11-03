@@ -115,20 +115,37 @@
   color: #ffffff;
 }
 
-/* Risk color legend */
+/* Risk color legend & expandable threshold matrix */
 .map-risk-legend {
   position: absolute;
   bottom: 28px;
   right: 14px;
-  background: rgba(15, 23, 42, 0.88);
+  background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 11px;
   padding: 10px 13px;
   color: #e2e8f0;
   font-size: 11.5px;
   z-index: 4;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.38);
+  min-width: 195px;
+}
+
+.map-risk-legend.expanded {
+  z-index: 6;
+  width: 332px;
+  background: rgba(15, 23, 42, 0.96);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.55);
+}
+
+.map-legend-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .map-legend-title {
@@ -137,7 +154,30 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #94a3b8;
-  margin-bottom: 7px;
+}
+
+.map-legend-toggle-btn {
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.12);
+  color: #7dd3fc;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2.5px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.map-legend-toggle-btn:hover {
+  background: rgba(56, 189, 248, 0.22);
+  color: #e0f2fe;
+}
+
+.map-legend-toggle-btn.active {
+  border-color: rgba(148, 163, 184, 0.3);
+  background: rgba(148, 163, 184, 0.16);
+  color: #e2e8f0;
 }
 
 .map-legend-items {
@@ -152,11 +192,128 @@
   gap: 8px;
 }
 
+.map-legend-level {
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.map-legend-inline-range {
+  margin-left: auto;
+  padding-left: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #93c5fd;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
 .map-legend-swatch {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   border: 1.5px solid rgba(255, 255, 255, 0.75);
+  flex-shrink: 0;
+}
+
+.map-thresholds-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.map-thresholds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.map-thresholds-table th {
+  text-align: left;
+  padding: 4px 6px 6px;
+  color: #94a3b8;
+  font-size: 10.5px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  vertical-align: bottom;
+}
+
+.map-thresholds-table th.col-active {
+  color: #38bdf8;
+}
+
+.th-unit {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.map-thresholds-table td {
+  padding: 5px 6px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.09);
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.map-thresholds-table td.col-active {
+  color: #f8fafc;
+  background: rgba(56, 189, 248, 0.09);
+  font-weight: 700;
+}
+
+.map-thresholds-table td.td-risk-level {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.map-load-rules {
+  background: rgba(9, 14, 26, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.map-load-rules-title {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fdba74;
+  margin-bottom: 6px;
+}
+
+.map-load-rules-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.map-load-rule-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+.load-rule-desc strong {
+  color: #f8fafc;
+}
+
+.load-rule-pill {
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1.5px 7px;
+  border-radius: 999px;
   flex-shrink: 0;
 }
 
@@ -265,18 +422,25 @@
     left: 14px;
     right: auto;
     bottom: auto;
-    padding: 7px 10px;
+    min-width: 0;
+    max-width: calc(100vw - 28px);
+    padding: 8px 10px;
     font-size: 10.5px;
   }
 
-  .map-legend-title {
-    display: none;
+  .map-risk-legend.expanded {
+    width: min(332px, calc(100vw - 28px));
   }
 
   .map-legend-items {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 6px 10px;
+    gap: 5px 10px;
+  }
+
+  .map-legend-inline-range {
+    margin-left: 2px;
+    padding-left: 0;
   }
 }
 

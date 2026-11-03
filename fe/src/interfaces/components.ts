@@ -3,6 +3,7 @@ import type {
   CorridorHeatmap,
   HeatmapMetric,
   LocationPoint,
+  RiskLevel,
   RouteCheckpoint,
   SamplingIntervalMiles,
 } from './routing'
@@ -77,5 +78,24 @@ export interface RouteMapProps {
   heatmapVisible?: boolean
   heatmapMetric?: HeatmapMetric
   focusedCheckpoint?: RouteCheckpoint | null
+}
+
+export interface RiskThresholdCells {
+  wind: string
+  rain: string
+  snow: string
+  windCompact: string
+  rainCompact: string
+  snowCompact: string
+}
+
+export interface LoadEscalationRule {
+  condition: string
+  load: string
+  result: RiskLevel
+}
+
+export interface RiskLegendProps {
+  heatmapMetric: HeatmapMetric
 }
 

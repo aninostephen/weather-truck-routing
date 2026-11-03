@@ -5,7 +5,6 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import {
   MAP_STYLES,
   RISK_COLORS,
-  RISK_ORDER,
   type MapStyleKey,
 } from '../../constants/risk'
 import type {
@@ -14,6 +13,7 @@ import type {
   RiskLevel,
   RouteMapProps,
 } from '../../interfaces'
+import { RiskLegend } from './RiskLegend'
 import './RouteMap.css'
 
 const DEFAULT_US_CENTER: [number, number] = [-98.5795, 39.8283]
@@ -826,20 +826,7 @@ export function RouteMap({
             </div>
           </div>
 
-          <div className="map-risk-legend" aria-label="Weather risk legend">
-            <div className="map-legend-title">Checkpoint &amp; Corridor Risk</div>
-            <div className="map-legend-items">
-              {RISK_ORDER.map((level) => (
-                <div key={level} className="map-legend-row">
-                  <span
-                    className="map-legend-swatch"
-                    style={{ backgroundColor: RISK_COLORS[level] }}
-                  />
-                  <span>{level}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RiskLegend heatmapMetric={heatmapMetric} />
         </>
       )}
     </div>

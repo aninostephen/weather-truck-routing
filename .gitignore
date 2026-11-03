@@ -1,0 +1,59 @@
+# ==========================================
+# Root Workspace
+# ==========================================
+node_modules/
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Backend — Django (be/)
+# ==========================================
+be/venv/
+be/.venv/
+be/.env
+be/.env.*
+!be/.env.example
+be/db.sqlite3
+be/*.sqlite3
+be/staticfiles/
+be/media/
+be/.pytest_cache/
+be/**/__pycache__/
+be/**/*.py[cod]
+__pycache__/
+*.py[cod]
+
+# ==========================================
+# Frontend — React + Vite (fe/)
+# ==========================================
+fe/node_modules/
+fe/dist/
+fe/dist-ssr/
+fe/.env
+fe/.env.*
+!fe/.env.example
+fe/*.local
+fe/*.tsbuildinfo
+
+# ==========================================
+# Logs & Editor / OS Files
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
